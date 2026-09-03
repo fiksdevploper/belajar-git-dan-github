@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaniHub - Hasil Tani Segar Langsung dari Petani</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-emerald-600 text-white sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-wide">TaniHub</h1>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#beranda" class="hover:text-emerald-200 transition">Beranda</a>
+                <a href="#produk" class="hover:text-emerald-200 transition">Produk</a>
+                <a href="#tentang" class="hover:text-emerald-200 transition">Tentang Kami</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <button
+                    class="bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                    Keranjang (0)
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section id="beranda" class="bg-emerald-100 py-16">
+        <div class="container mx-auto px-4 text-center max-w-2xl">
+            <h2 class="text-4xl font-extrabold text-emerald-900 mb-4">Hasil Tani Segar Langsung ke Pintu Rumah Anda</h2>
+            <p class="text-gray-700 mb-6">Mendukung petani lokal dengan mendistribusikan sayur, buah, dan bahan pangan
+                berkualitas tinggi secara langsung.</p>
+            <a href="#produk"
+                class="bg-emerald-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-emerald-700 transition inline-block">Belanja
+                Sekarang</a>
+        </div>
+    </section>
+
+    <section id="produk" class="container mx-auto px-4 py-12">
+        <h3 class="text-2xl font-bold text-gray-800 mb-6">Produk Unggulan</h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+
+            <div class="bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition">
+                <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=400&q=80"
+                    alt="Kentang Organik" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <span class="text-xs font-semibold bg-emerald-100 text-emerald-800 px-2 py-1 rounded">Sayuran</span>
+                    <h4 class="font-bold text-lg mt-2">Kentang Organik</h4>
+                    <p class="text-gray-500 text-sm">1 kg</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-emerald-700 font-bold">Rp 18.000</span>
+                        <button
+                            class="bg-emerald-600 text-white text-sm px-3 py-1.5 rounded hover:bg-emerald-700 transition">+
+                            Tambah</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition">
+                <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=400&q=80"
+                    alt="Apel Manis" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <span class="text-xs font-semibold bg-emerald-100 text-emerald-800 px-2 py-1 rounded">Buah</span>
+                    <h4 class="font-bold text-lg mt-2">Apel Malang Segar</h4>
+                    <p class="text-gray-500 text-sm">1 kg</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-emerald-700 font-bold">Rp 32.000</span>
+                        <button
+                            class="bg-emerald-600 text-white text-sm px-3 py-1.5 rounded hover:bg-emerald-700 transition">+
+                            Tambah</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition">
+                <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=400&q=80"
+                    alt="Tomat Merah" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <span class="text-xs font-semibold bg-emerald-100 text-emerald-800 px-2 py-1 rounded">Sayuran</span>
+                    <h4 class="font-bold text-lg mt-2">Tomat Segar</h4>
+                    <p class="text-gray-500 text-sm">500 gram</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-emerald-700 font-bold">Rp 8.500</span>
+                        <button
+                            class="bg-emerald-600 text-white text-sm px-3 py-1.5 rounded hover:bg-emerald-700 transition">+
+                            Tambah</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition">
+                <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80"
+                    alt="Beras Organik" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <span class="text-xs font-semibold bg-emerald-100 text-emerald-800 px-2 py-1 rounded">Beras</span>
+                    <h4 class="font-bold text-lg mt-2">Beras Pandan Wangi</h4>
+                    <p class="text-gray-500 text-sm">5 kg</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-emerald-700 font-bold">Rp 75.000</span>
+                        <button
+                            class="bg-emerald-600 text-white text-sm px-3 py-1.5 rounded hover:bg-emerald-700 transition">+
+                            Tambah</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer id="tentang" class="bg-gray-800 text-gray-300 py-8 border-t border-gray-700">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h4 class="text-white font-bold text-lg mb-2">TaniHub</h4>
+                <p class="text-sm">Platform penghubung petani lokal dengan konsumen untuk menyalurkan hasil panen
+                    berkualitas secara adil dan cepat.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-lg mb-2">Kontak</h4>
+                <p class="text-sm">Email: support@tanihub.com</p>
+                <p class="text-sm">WhatsApp: +62 812-3456-7890</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-lg mb-2">Lokasi</h4>
+                <p class="text-sm">Bogor, Jawa Barat, Indonesia</p>
+            </div>
+        </div>
+        <div class="text-center text-xs text-gray-500 mt-8">
+            &copy; 2026 TaniHub. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+
+</html>
