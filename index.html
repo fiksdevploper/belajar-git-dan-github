@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TaniHub - Hasil Tani Segar Langsung dari Petani</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
 <body class="bg-gray-50 text-gray-800">
 
     <header class="bg-emerald-600 text-white sticky top-0 z-50 shadow-md">
@@ -15,158 +13,178 @@
             <h1 class="text-2xl font-bold tracking-wide">TaniHub</h1>
             <nav class="hidden md:flex space-x-6">
                 <a href="#beranda" class="hover:text-emerald-200 transition">Beranda</a>
-                <a href="#produk" class="hover:text-emerald-200 transition">Produk</a>
+                <a href="#katalog" class="hover:text-emerald-200 transition">Katalog</a>
                 <a href="#tentang" class="hover:text-emerald-200 transition">Tentang Kami</a>
             </nav>
             <div class="flex items-center space-x-4">
-                <button
-                    class="bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
-                    Keranjang (0)
+                <button class="bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
+                    <span>🛒</span> Keranjang <span id="cart-count" class="bg-emerald-900 text-xs px-2 py-0.5 rounded-full">0</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <section id="beranda" class="bg-emerald-100 py-16">
+    <section id="beranda" class="bg-emerald-100 py-12">
         <div class="container mx-auto px-4 text-center max-w-2xl">
-            <h2 class="text-4xl font-extrabold text-emerald-900 mb-4">Hasil Tani Segar Langsung ke Pintu Rumah Anda</h2>
-            <p class="text-gray-700 mb-6">Mendukung petani lokal dengan mendistribusikan sayur, buah, dan bahan pangan
-                berkualitas tinggi secara langsung.</p>
-            <a href="#produk"
-                class="bg-emerald-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-emerald-700 transition inline-block">Belanja
-                Sekarang</a>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-emerald-900 mb-4">Hasil Tani Segar Langsung ke Pintu Rumah Anda</h2>
+            <p class="text-gray-700 mb-6">Mendukung petani lokal dengan mendistribusikan sayur, buah, dan bahan pangan berkualitas tinggi secara langsung.</p>
+            <a href="#katalog" class="bg-emerald-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-emerald-700 transition inline-block">Jelajahi Katalog</a>
         </div>
     </section>
 
-    <section id="produk" class="container mx-auto px-4 py-12">
-        <h3 class="text-2xl font-bold text-gray-800 mb-6">Produk Unggulan</h3>
+    <section id="katalog" class="container mx-auto px-4 py-12">
+        
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+            <div>
+                <h3 class="text-2xl font-bold text-gray-800">Katalog Produk</h3>
+                <p class="text-sm text-gray-500">Pilih bahan segar sesuai kebutuhanmu</p>
+            </div>
+            
+            <div class="relative w-full md:w-72">
+                <input type="text" id="search-input" onkeyup="filterProducts()" placeholder="Cari produk (misal: Cabai)..." class="w-full pl-10 pr-4 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                <span class="absolute left-3 top-2.5 text-gray-400">🔍</span>
+            </div>
+        </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-
-            <div class="bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition">
-                <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=400&q=80"
-                    alt="Kentang Organik" class="w-full h-48 object-cover">
+        <div class="flex flex-wrap gap-2 mb-8" id="category-buttons">
+            <button onclick="filterCategory('semua')" class="filter-btn active-btn px-4 py-1.5 text-sm font-medium bg-emerald-600 text-white rounded-full">Semua</button>
+            <button onclick="filterCategory('sayuran')" class="filter-btn px-4 py-1.5 text-sm font-medium bg-white border text-gray-600 hover:bg-gray-100 rounded-full">Sayuran</button>
+            <button onclick="filterCategory('buah')" class="filter-btn px-4 py-1.5 text-sm font-medium bg-white border text-gray-600 hover:bg-gray-100 rounded-full">Buah</button>
+            <button onclick="filterCategory('bumbu')" class="filter-btn px-4 py-1.5 text-sm font-medium bg-white border text-gray-600 hover:bg-gray-100 rounded-full">Bumbu</button>
+            <button onclick="filterCategory('beras')" class="filter-btn px-4 py-1.5 text-sm font-medium bg-white border text-gray-600 hover:bg-gray-100 rounded-full">Beras</button>
+        </div>
+        
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            
+            <div class="product-card bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition" data-category="sayuran" data-name="kentang organik">
+                <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=400&q=80" class="w-full h-48 object-cover cursor-pointer" onclick="openModal('Kentang Organik', 'Sayuran', '1 kg', 'Rp 18.000', 'Kentang segar dari dataran tinggi Dieng, dipanen tanpa pestisida sintetis.', 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=400&q=80')">
                 <div class="p-4">
                     <span class="text-xs font-semibold bg-emerald-100 text-emerald-800 px-2 py-1 rounded">Sayuran</span>
-                    <h4 class="font-bold text-lg mt-2">Kentang Organik</h4>
+                    <h4 class="font-bold text-lg mt-2 cursor-pointer hover:text-emerald-600" onclick="openModal('Kentang Organik', 'Sayuran', '1 kg', 'Rp 18.000', 'Kentang segar dari dataran tinggi Dieng, dipanen tanpa pestisida sintetis.', 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=400&q=80')">Kentang Organik</h4>
                     <p class="text-gray-500 text-sm">1 kg</p>
                     <div class="flex justify-between items-center mt-4">
                         <span class="text-emerald-700 font-bold">Rp 18.000</span>
-                        <button
-                            class="bg-emerald-600 text-white text-sm px-3 py-1.5 rounded hover:bg-emerald-700 transition">+
-                            Tambah</button>
+                        <button onclick="addToCart()" class="bg-emerald-600 text-white text-sm px-3 py-1.5 rounded hover:bg-emerald-700 transition">+ Tambah</button>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition">
-                <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=400&q=80"
-                    alt="Apel Manis" class="w-full h-48 object-cover">
+            <div class="product-card bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition" data-category="buah" data-name="apel malang segar">
+                <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=400&q=80" class="w-full h-48 object-cover cursor-pointer" onclick="openModal('Apel Malang Segar', 'Buah', '1 kg', 'Rp 32.000', 'Apel lokal dengan rasa manis keasaman yang khas dan renyah.', 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=400&q=80')">
                 <div class="p-4">
                     <span class="text-xs font-semibold bg-emerald-100 text-emerald-800 px-2 py-1 rounded">Buah</span>
-                    <h4 class="font-bold text-lg mt-2">Apel Malang Segar</h4>
+                    <h4 class="font-bold text-lg mt-2 cursor-pointer hover:text-emerald-600" onclick="openModal('Apel Malang Segar', 'Buah', '1 kg', 'Rp 32.000', 'Apel lokal dengan rasa manis keasaman yang khas dan renyah.', 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=400&q=80')">Apel Malang Segar</h4>
                     <p class="text-gray-500 text-sm">1 kg</p>
                     <div class="flex justify-between items-center mt-4">
                         <span class="text-emerald-700 font-bold">Rp 32.000</span>
-                        <button
-                            class="bg-emerald-600 text-white text-sm px-3 py-1.5 rounded hover:bg-emerald-700 transition">+
-                            Tambah</button>
+                        <button onclick="addToCart()" class="bg-emerald-600 text-white text-sm px-3 py-1.5 rounded hover:bg-emerald-700 transition">+ Tambah</button>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition">
-                <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=400&q=80"
-                    alt="Tomat Merah" class="w-full h-48 object-cover">
+            <div class="product-card bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition" data-category="sayuran" data-name="tomat segar">
+                <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=400&q=80" class="w-full h-48 object-cover cursor-pointer" onclick="openModal('Tomat Segar', 'Sayuran', '500 gram', 'Rp 8.500', 'Tomat merah ranum, kaya antioksidan dan cocok untuk masakan.', 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=400&q=80')">
                 <div class="p-4">
                     <span class="text-xs font-semibold bg-emerald-100 text-emerald-800 px-2 py-1 rounded">Sayuran</span>
-                    <h4 class="font-bold text-lg mt-2">Tomat Segar</h4>
+                    <h4 class="font-bold text-lg mt-2 cursor-pointer hover:text-emerald-600" onclick="openModal('Tomat Segar', 'Sayuran', '500 gram', 'Rp 8.500', 'Tomat merah ranum, kaya antioksidan dan cocok untuk masakan.', 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=400&q=80')">Tomat Segar</h4>
                     <p class="text-gray-500 text-sm">500 gram</p>
                     <div class="flex justify-between items-center mt-4">
                         <span class="text-emerald-700 font-bold">Rp 8.500</span>
-                        <button
-                            class="bg-emerald-600 text-white text-sm px-3 py-1.5 rounded hover:bg-emerald-700 transition">+
-                            Tambah</button>
+                        <button onclick="addToCart()" class="bg-emerald-600 text-white text-sm px-3 py-1.5 rounded hover:bg-emerald-700 transition">+ Tambah</button>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition">
-                <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80"
-                    alt="Beras Organik" class="w-full h-48 object-cover">
+            <div class="product-card bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition" data-category="beras" data-name="beras pandan wangi">
+                <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80" class="w-full h-48 object-cover cursor-pointer" onclick="openModal('Beras Pandan Wangi', 'Beras', '5 kg', 'Rp 75.000', 'Beras pulen dengan aroma pandan alami tanpa pemutih buatan.', 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80')">
                 <div class="p-4">
                     <span class="text-xs font-semibold bg-emerald-100 text-emerald-800 px-2 py-1 rounded">Beras</span>
-                    <h4 class="font-bold text-lg mt-2">Beras Pandan Wangi</h4>
+                    <h4 class="font-bold text-lg mt-2 cursor-pointer hover:text-emerald-600" onclick="openModal('Beras Pandan Wangi', 'Beras', '5 kg', 'Rp 75.000', 'Beras pulen dengan aroma pandan alami tanpa pemutih buatan.', 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80')">Beras Pandan Wangi</h4>
                     <p class="text-gray-500 text-sm">5 kg</p>
                     <div class="flex justify-between items-center mt-4">
                         <span class="text-emerald-700 font-bold">Rp 75.000</span>
-                        <button
-                            class="bg-emerald-600 text-white text-sm px-3 py-1.5 rounded hover:bg-emerald-700 transition">+
-                            Tambah</button>
+                        <button onclick="addToCart()" class="bg-emerald-600 text-white text-sm px-3 py-1.5 rounded hover:bg-emerald-700 transition">+ Tambah</button>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition">
-                <img src="https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=400&q=80" alt="Cabai Merah" class="w-full h-48 object-cover">
+            <div class="product-card bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition" data-category="bumbu" data-name="cabai merah keriting">
+                <img src="https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=400&q=80" class="w-full h-48 object-cover cursor-pointer" onclick="openModal('Cabai Merah Keriting', 'Bumbu', '250 gram', 'Rp 12.500', 'Cabai merah pedas segar dipetik langsung dari kebun petani.', 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=400&q=80')">
                 <div class="p-4">
                     <span class="text-xs font-semibold bg-orange-100 text-orange-800 px-2 py-1 rounded">Bumbu</span>
-                    <h4 class="font-bold text-lg mt-2">Cabai Merah Keriting</h4>
+                    <h4 class="font-bold text-lg mt-2 cursor-pointer hover:text-emerald-600" onclick="openModal('Cabai Merah Keriting', 'Bumbu', '250 gram', 'Rp 12.500', 'Cabai merah pedas segar dipetik langsung dari kebun petani.', 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=400&q=80')">Cabai Merah Keriting</h4>
                     <p class="text-gray-500 text-sm">250 gram</p>
                     <div class="flex justify-between items-center mt-4">
                         <span class="text-emerald-700 font-bold">Rp 12.500</span>
-                        <button class="bg-emerald-600 text-white text-sm px-3 py-1.5 rounded hover:bg-emerald-700 transition">+ Tambah</button>
+                        <button onclick="addToCart()" class="bg-emerald-600 text-white text-sm px-3 py-1.5 rounded hover:bg-emerald-700 transition">+ Tambah</button>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition">
-                <img src="https://images.unsplash.com/photo-1618512496248-a07fe83aa8cf?auto=format&fit=crop&w=400&q=80" alt="Bawang Merah" class="w-full h-48 object-cover">
+            <div class="product-card bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition" data-category="bumbu" data-name="bawang merah brebes">
+                <img src="https://images.unsplash.com/photo-1618512496248-a07fe83aa8cf?auto=format&fit=crop&w=400&q=80" class="w-full h-48 object-cover cursor-pointer" onclick="openModal('Bawang Merah Brebes', 'Bumbu', '500 gram', 'Rp 22.000', 'Bawang merah khas Brebes dengan aroma harum yang kuat.', 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cf?auto=format&fit=crop&w=400&q=80')">
                 <div class="p-4">
                     <span class="text-xs font-semibold bg-orange-100 text-orange-800 px-2 py-1 rounded">Bumbu</span>
-                    <h4 class="font-bold text-lg mt-2">Bawang Merah Brebes</h4>
+                    <h4 class="font-bold text-lg mt-2 cursor-pointer hover:text-emerald-600" onclick="openModal('Bawang Merah Brebes', 'Bumbu', '500 gram', 'Rp 22.000', 'Bawang merah khas Brebes dengan aroma harum yang kuat.', 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cf?auto=format&fit=crop&w=400&q=80')">Bawang Merah Brebes</h4>
                     <p class="text-gray-500 text-sm">500 gram</p>
                     <div class="flex justify-between items-center mt-4">
                         <span class="text-emerald-700 font-bold">Rp 22.000</span>
-                        <button class="bg-emerald-600 text-white text-sm px-3 py-1.5 rounded hover:bg-emerald-700 transition">+ Tambah</button>
+                        <button onclick="addToCart()" class="bg-emerald-600 text-white text-sm px-3 py-1.5 rounded hover:bg-emerald-700 transition">+ Tambah</button>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition">
-                <img src="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=400&q=80" alt="Alpukat Mentega" class="w-full h-48 object-cover">
+            <div class="product-card bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition" data-category="buah" data-name="alpukat mentega">
+                <img src="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=400&q=80" class="w-full h-48 object-cover cursor-pointer" onclick="openModal('Alpukat Mentega', 'Buah', '1 kg', 'Rp 35.000', 'Alpukat berdaging tebal, gurih, dan siap dikonsumsi.', 'https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=400&q=80')">
                 <div class="p-4">
                     <span class="text-xs font-semibold bg-emerald-100 text-emerald-800 px-2 py-1 rounded">Buah</span>
-                    <h4 class="font-bold text-lg mt-2">Alpukat Mentega</h4>
+                    <h4 class="font-bold text-lg mt-2 cursor-pointer hover:text-emerald-600" onclick="openModal('Alpukat Mentega', 'Buah', '1 kg', 'Rp 35.000', 'Alpukat berdaging tebal, gurih, dan siap dikonsumsi.', 'https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=400&q=80')">Alpukat Mentega</h4>
                     <p class="text-gray-500 text-sm">1 kg</p>
                     <div class="flex justify-between items-center mt-4">
                         <span class="text-emerald-700 font-bold">Rp 35.000</span>
-                        <button class="bg-emerald-600 text-white text-sm px-3 py-1.5 rounded hover:bg-emerald-700 transition">+ Tambah</button>
+                        <button onclick="addToCart()" class="bg-emerald-600 text-white text-sm px-3 py-1.5 rounded hover:bg-emerald-700 transition">+ Tambah</button>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition">
-                <img src="https://images.unsplash.com/photo-1598170845058-12ef4a457939?auto=format&fit=crop&w=400&q=80" alt="Wortel Organik" class="w-full h-48 object-cover">
+            <div class="product-card bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition" data-category="sayuran" data-name="wortel organik">
+                <img src="https://images.unsplash.com/photo-1598170845058-12ef4a457939?auto=format&fit=crop&w=400&q=80" class="w-full h-48 object-cover cursor-pointer" onclick="openModal('Wortel Organik', 'Sayuran', '500 gram', 'Rp 10.000', 'Wortel manis dan renyah, kaya Vitamin A untuk kesehatan mata.', 'https://images.unsplash.com/photo-1598170845058-12ef4a457939?auto=format&fit=crop&w=400&q=80')">
                 <div class="p-4">
                     <span class="text-xs font-semibold bg-emerald-100 text-emerald-800 px-2 py-1 rounded">Sayuran</span>
-                    <h4 class="font-bold text-lg mt-2">Wortel Organik</h4>
+                    <h4 class="font-bold text-lg mt-2 cursor-pointer hover:text-emerald-600" onclick="openModal('Wortel Organik', 'Sayuran', '500 gram', 'Rp 10.000', 'Wortel manis dan renyah, kaya Vitamin A untuk kesehatan mata.', 'https://images.unsplash.com/photo-1598170845058-12ef4a457939?auto=format&fit=crop&w=400&q=80')">Wortel Organik</h4>
                     <p class="text-gray-500 text-sm">500 gram</p>
                     <div class="flex justify-between items-center mt-4">
                         <span class="text-emerald-700 font-bold">Rp 10.000</span>
-                        <button class="bg-emerald-600 text-white text-sm px-3 py-1.5 rounded hover:bg-emerald-700 transition">+ Tambah</button>
+                        <button onclick="addToCart()" class="bg-emerald-600 text-white text-sm px-3 py-1.5 rounded hover:bg-emerald-700 transition">+ Tambah</button>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
+
+    <div id="product-modal" class="fixed inset-0 bg-black/50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-md w-full overflow-hidden shadow-xl relative">
+            <button onclick="closeModal()" class="absolute top-3 right-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-full w-8 h-8 flex items-center justify-center font-bold">&times;</button>
+            <img id="modal-img" src="" class="w-full h-56 object-cover">
+            <div class="p-6">
+                <span id="modal-category" class="text-xs font-semibold bg-emerald-100 text-emerald-800 px-2 py-1 rounded"></span>
+                <h3 id="modal-title" class="text-xl font-bold mt-2"></h3>
+                <p id="modal-weight" class="text-gray-500 text-sm mb-2"></p>
+                <p id="modal-desc" class="text-gray-600 text-sm mb-4"></p>
+                <div class="flex justify-between items-center border-t pt-4">
+                    <span id="modal-price" class="text-emerald-700 font-bold text-lg"></span>
+                    <button onclick="addToCart(); closeModal();" class="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition">+ Tambah Ke Keranjang</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer id="tentang" class="bg-gray-800 text-gray-300 py-8 border-t border-gray-700">
         <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
                 <h4 class="text-white font-bold text-lg mb-2">TaniHub</h4>
-                <p class="text-sm">Platform penghubung petani lokal dengan konsumen untuk menyalurkan hasil panen
-                    berkualitas secara adil dan cepat.</p>
+                <p class="text-sm">Platform penghubung petani lokal dengan konsumen untuk menyalurkan hasil panen berkualitas secara adil dan cepat.</p>
             </div>
             <div>
                 <h4 class="text-white font-bold text-lg mb-2">Kontak</h4>
@@ -183,6 +201,59 @@
         </div>
     </footer>
 
-</body>
+    <script>
+        let cartCount = 0;
+        let selectedCategory = 'semua';
 
+        function addToCart() {
+            cartCount++;
+            document.getElementById('cart-count').innerText = cartCount;
+        }
+
+        function filterCategory(category) {
+            selectedCategory = category;
+            
+            // Ubah tampilan tombol aktif
+            const buttons = document.querySelectorAll('#category-buttons button');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-emerald-600', 'text-white');
+                btn.classList.add('bg-white', 'text-gray-600', 'border');
+            });
+            event.target.classList.remove('bg-white', 'text-gray-600', 'border');
+            event.target.classList.add('bg-emerald-600', 'text-white');
+
+            filterProducts();
+        }
+
+        function filterProducts() {
+            const searchKeyword = document.getElementById('search-input').value.toLowerCase();
+            const products = document.querySelectorAll('.product-card');
+
+            products.forEach(product => {
+                const categoryMatch = selectedCategory === 'semua' || product.dataset.category === selectedCategory;
+                const searchMatch = product.dataset.name.toLowerCase().includes(searchKeyword);
+
+                if (categoryMatch && searchMatch) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        function openModal(title, category, weight, price, desc, imgSrc) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-category').innerText = category;
+            document.getElementById('modal-weight').innerText = weight;
+            document.getElementById('modal-price').innerText = price;
+            document.getElementById('modal-desc').innerText = desc;
+            document.getElementById('modal-img').src = imgSrc;
+            document.getElementById('product-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+        }
+    </script>
+</body>
 </html>
