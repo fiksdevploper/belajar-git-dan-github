@@ -7,7 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 text-gray-800">
-
     <header class="bg-emerald-600 text-white sticky top-0 z-50 shadow-md">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <h1 class="text-2xl font-bold tracking-wide">TaniHub</h1>
@@ -148,6 +147,51 @@
                 </div>
             </div>
 
+            <div class="product-card bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition flex flex-col justify-between" data-category="sayuran" data-name="tomat segar">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=400&q=80" class="w-full h-48 object-cover cursor-pointer" onclick="openModal('Tomat Segar', 'Sayuran', '500 gram', 'Rp 8.500', 'Tomat merah ranum, kaya antioksidan dan cocok untuk masakan.', 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=400&q=80', 'Kelompok Tani Sukabumi', '4.7', '15', 'Tomatnya merah merata, pas buat bikin sambal atau juice.')">
+                    <div class="p-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-semibold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">Sayuran</span>
+                            <div class="text-xs text-amber-500 font-bold flex items-center gap-1 cursor-pointer" onclick="openModal('Tomat Segar', 'Sayuran', '500 gram', 'Rp 8.500', 'Tomat merah ranum, kaya antioksidan dan cocok untuk masakan.', 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=400&q=80', 'Kelompok Tani Sukabumi', '4.7', '15', 'Tomatnya merah merata, pas buat bikin sambal atau juice.')">
+                                <span>★ 4.7</span> <span class="text-gray-400 font-normal">(15)</span>
+                            </div>
+                        </div>
+                        <h4 class="font-bold text-lg mt-2 cursor-pointer hover:text-emerald-600" onclick="openModal('Tomat Segar', 'Sayuran', '500 gram', 'Rp 8.500', 'Tomat merah ranum, kaya antioksidan dan cocok untuk masakan.', 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=400&q=80', 'Kelompok Tani Sukabumi', '4.7', '15', 'Tomatnya merah merata, pas buat bikin sambal atau juice.')">Tomat Segar</h4>
+                        <p class="text-xs text-gray-500 mt-1">👨‍🌾 Petani: <span class="font-medium text-gray-700">Poktan Sukabumi</span></p>
+                        <p class="text-gray-500 text-sm mt-1">500 gram</p>
+                    </div>
+                </div>
+                <div class="p-4 pt-0">
+                    <div class="flex justify-between items-center border-t pt-3">
+                        <span class="text-emerald-700 font-bold">Rp 8.500</span>
+                        <button onclick="addToCart()" class="bg-emerald-600 text-white text-sm px-3 py-1.5 rounded hover:bg-emerald-700 transition">+ Tambah</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition flex flex-col justify-between" data-category="beras" data-name="beras pandan wangi">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80" class="w-full h-48 object-cover cursor-pointer" onclick="openModal('Beras Pandan Wangi', 'Beras', '5 kg', 'Rp 75.000', 'Beras pulen dengan aroma pandan alami tanpa pemutih buatan.', 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80', 'Pak Solihin (Cianjur)', '5.0', '53', 'Berasnya sangat pulen dan benar-benar wangi alami!')">
+                    <div class="p-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-semibold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">Beras</span>
+                            <div class="text-xs text-amber-500 font-bold flex items-center gap-1 cursor-pointer" onclick="openModal('Beras Pandan Wangi', 'Beras', '5 kg', 'Rp 75.000', 'Beras pulen dengan aroma pandan alami tanpa pemutih buatan.', 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80', 'Pak Solihin (Cianjur)', '5.0', '53', 'Berasnya sangat pulen dan benar-benar wangi alami!')">
+                                <span>★ 5.0</span> <span class="text-gray-400 font-normal">(53)</span>
+                            </div>
+                        </div>
+                        <h4 class="font-bold text-lg mt-2 cursor-pointer hover:text-emerald-600" onclick="openModal('Beras Pandan Wangi', 'Beras', '5 kg', 'Rp 75.000', 'Beras pulen dengan aroma pandan alami tanpa pemutih buatan.', 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80', 'Pak Solihin (Cianjur)', '5.0', '53', 'Berasnya sangat pulen dan benar-benar wangi alami!')">Beras Pandan Wangi</h4>
+                        <p class="text-xs text-gray-500 mt-1">👨‍🌾 Petani: <span class="font-medium text-gray-700">Pak Solihin (Cianjur)</span></p>
+                        <p class="text-gray-500 text-sm mt-1">5 kg</p>
+                    </div>
+                </div>
+                <div class="p-4 pt-0">
+                    <div class="flex justify-between items-center border-t pt-3">
+                        <span class="text-emerald-700 font-bold">Rp 75.000</span>
+                        <button onclick="addToCart()" class="bg-emerald-600 text-white text-sm px-3 py-1.5 rounded hover:bg-emerald-700 transition">+ Tambah</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
